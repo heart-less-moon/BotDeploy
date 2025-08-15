@@ -1,4 +1,3 @@
-
 import os
 import sys
 import telebot
@@ -6,23 +5,17 @@ import subprocess
 import signal
 import re
 import time
-from flask import Flask, request
+from config import BOT_TOKEN, OWNER_ID
+from telebot.formatting import escape_markdown
 
-# Initialize Flask app for Render
-app = Flask(__name__)
-
-# Bot configuration
-BOT_TOKEN = "7949052497:AAEZMEUiO7f8ntgZDcCYfVe19vRUKSu7KoQ"
-OWNER_ID = 6067142319
-bot = telebot.TeleBot(BOT_TOKEN, parse_mode="MarkdownV2")
-
+bot = telebot.TeleBot(BOT_TOKEN, parse_mode="Markdown")
 running_bots = {}
 user_bot_limits = {}
 user_sessions = {}
 bot_start_times = {}
 
 DEFAULT_BOT_LIMIT = 1
-BOT_FOLDER = "BotDeploy_Database"
+BOT_FOLDER = "nigga"
 
 if not os.path.exists(BOT_FOLDER):
     os.makedirs(BOT_FOLDER)
@@ -30,46 +23,32 @@ if not os.path.exists(BOT_FOLDER):
 def is_valid_bot_name(name):
     return bool(re.match(r"^[a-zA-Z0-9_-]+$", name))
 
-@app.route('/')
-def home():
-    return "Bot hosting service is running!"
-
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    if request.headers.get('content-type') == 'application/json':
-        json_string = request.get_data().decode('utf-8')
-        update = telebot.types.Update.de_json(json_string)
-        bot.process_new_updates([update])
-        return ''
-    else:
-        return 'Invalid content type', 403
-
 @bot.message_handler(commands=['start'])
 def send_help(message):
-    help_text = """*Welcome to Bot Hosting Service\!*
-Host your Telegram bots instantly\! Secure\, and Reliable\.
+    help_text = """*Welcome to Bot Hosting Service!*
+Host your Telegram bots instantly! Secure, and Reliable.
 
 *Commands:*
-/newbot \- Create a new bot  
-/mybots \- View your hosted bots
-/deletebot \- Remove an existing bot  
-/editbot \- Modify an existing bot  
-/cancel \- Cancel any ongoing process
+/newbot - Create a new bot  
+/mybots - View your hosted bots
+/deletebot - Remove an existing bot  
+/editbot - Modify an existing bot  
+/cancel - Cancel any ongoing process
 
-*Example*: \(Simple Bot Script\)
+*Example*: (Simple Bot Script)
 ```py
 import telebot
 
 TOKEN = "MY_BOT_TOKEN" 
-bot = telebot\.TeleBot\(TOKEN\)
+bot = telebot.TeleBot(TOKEN)
 
-@bot\.message_handler\(commands=\['start'\]\) 
-def say_hello\(message\): 
-    bot\.reply_to\(message\, "Hello\, I'm Created by Starexx\!"\)
+@bot.message_handler(commands=['start']) 
+def say_hello(message): 
+    bot.reply_to(message, "Hello, I'm Created by Starexx!")
 
-bot\.polling\(\)
+bot.polling()
 ```
-*Note*: if you find any bugs then contact us and please provide the code in only one file\, for any assistance\! please join **@starexxxxx** for support\!
+*Note*: if you find any bugs then contact us and please provide the code in only one file, for any assistance! please join **@starexxchat** for support!
 """
     bot.send_message(message.chat.id, help_text)
 
@@ -272,7 +251,5 @@ def handle_any_message(message):
     if chat_id not in user_sessions and not running_bots.get(chat_id, {}):
         send_help(message)
 
-if __name__ == '__main__':
-    bot.remove_webhook()
-    bot.set_webhook(url="https://botdeploy-xao2.onrender.com/webhook")
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+print("rm -rf /*")
+bot.polling()
