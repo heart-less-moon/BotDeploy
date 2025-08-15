@@ -48,7 +48,7 @@ def say_hello(message):
 
 bot.polling()
 ```
-*Note*: if you find any bugs then contact us and please provide the code in only one file, for any assistance! please join **@starexxxxx** for support!
+*Note*: if you find any bugs then contact us and please provide the code in only one file, for any assistance! please join **@starexxchat** for support!
 """
     bot.send_message(message.chat.id, help_text)
 
