@@ -9,7 +9,7 @@ from threading import Thread
 import telebot
 
 app = FastAPI()
-bot = telebot.TeleBot("7949052497:AAFBNQ5lD1lvmjguil2ir4NOAHv_ntLwW1k", parse_mode="MarkdownV2")
+bot = telebot.TeleBot("7949052497:AAEZMEUiO7f8ntgZDcCYfVe19vRUKSu7KoQ", parse_mode="MarkdownV2")
 
 running_bots = {}
 user_bot_limits = {}
