@@ -1,2 +1,2 @@
-BOT_TOKEN = "7949052497:AAEyG83j3-PdhEg9hGbZtt5t_Tl9c2kftNY" # Test Token hai bhai edit kr dena
-OWNER_ID = 6067142319
+BOT_TOKEN = "8176923352:AAF0LnItAoD8MaWGOf52fK2hXVoD1RQQV3g" # Test Token hai bhai edit kr dena
+OWNER_ID = 7475361823
